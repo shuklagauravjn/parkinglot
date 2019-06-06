@@ -11,18 +11,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 @RepositoryRestResource
-public interface TicketRepository extends JpaRepository<Ticket, String> {
-    /**
-     *
-     * @param id
-     * @return
-     */
+public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	Ticket findByParkinglot(Parkinglot slotnumber);
-
-    /**
-     *
-     * @param walletId
-     * @return
-     */
     List<Ticket> findByCar(Car registrationNumber);
+	//Ticket findOne(Integer integer);
 }

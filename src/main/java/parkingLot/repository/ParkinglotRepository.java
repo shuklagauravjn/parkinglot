@@ -9,18 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 @RepositoryRestResource
-public interface ParkinglotRepository extends JpaRepository<Parkinglot, String> {
-    /**
-     *
-     * @param id
-     * @return
-     */
+public interface ParkinglotRepository extends JpaRepository<Parkinglot, Integer> {
 	Parkinglot findBySlotnumber(int slotnumber);
-
-    /**
-     *
-     * @param walletId
-     * @return
-     */
     List<Parkinglot> findByIsavailable(String isAvailable);
 }
