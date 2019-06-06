@@ -1,0 +1,18 @@
+---
+version: "2"
+
+services:
+  app:
+    build: .
+    environment:
+      SERVICE_8080_NAME: parkingLot
+      SERVICE_TAGS: public
+      POSTGRESQL_DB_NAME: parkingLotDB
+      DB_USER: postgres
+      DB_PASSWORD: ""
+      SWAGGER_HOST: swagger_host_url
+    network_mode: bridge
+    dns: 172.17.0.1
+    dns_search: service.consul.
+    ports:
+      - 9090:8080
