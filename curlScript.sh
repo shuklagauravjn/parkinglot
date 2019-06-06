@@ -1,0 +1,9 @@
+curl localhost:9090/setParkinglotSize?parkingSize=5
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9184&colour=BLACK
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9185&colour=WHITE
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9186&colour=RED
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9187&colour=SILVER
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9188&colour=GREY
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9189&colour=BROWN
+curl localhost:9090/returnTicket?ticketId=53
+curl localhost:9090/issueTicket?registrationNumber=KA53MA9189&colour=BROWN

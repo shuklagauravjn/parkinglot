@@ -15,8 +15,6 @@ public class Car implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CAR_REGISTRATIONNUMBER_GENERATOR", sequenceName="PARKINGLOTSEQUENCE")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CAR_REGISTRATIONNUMBER_GENERATOR")
 	private String registrationnumber;
 
 	private String colour;
