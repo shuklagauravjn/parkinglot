@@ -1,4 +1,11 @@
-The data model for the parking lot application is as follows:
+Please refer to the read me file before you start using this project.
+Software pre-requisites:
+1. Docker
+2. Kitematic
+3. Java version 8
+4. PostGres - try using the docker image for postgres at https://hub.docker.com/_/postgres
+5. Maven
+6. Unit testing
 
 ## Technical Architecture
 In this section we are detailing out the technical architecture of the parking lot application.
