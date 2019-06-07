@@ -7,28 +7,28 @@ Please refer to the read me file before you start using this project.
 5. Maven
 6. Unit testing
 ## Software Installation Instrtuctions
-Step 1: Clone this git repository from https://github.com/shuklagauravjn/parkinglot.git
-Step 2: Edit the properties file present at /src/main/resources/application.properties
-Step 3: change the value for spring.datasource.url=jdbc:postgresql://<<your postgres host IP>>:<<your postgres host port>/<<your postgres database name>
-Step 4: Go to the terminal window and the present working directory should be the root of this folder
-Step 5: type mvn clean install This command will clean and later build this package. Check the logs and you should see some logs like this:
-  Hibernate: alter table ticket drop constraint FK2ii5cq5xek9b6scbnn5h7nwia
-  Hibernate: alter table ticket drop constraint FK5s6o4c33uj044cbfqxukrf9ki
-  Hibernate: drop table if exists car cascade
-  Hibernate: drop table if exists parkinglot cascade
-  Hibernate: drop table if exists ticket cascade
-  Hibernate: drop sequence if exists parkinglotsequence
-  Hibernate: create sequence parkinglotsequence start 1 increment 50
-  Hibernate: create table car (registrationnumber varchar(255) not null, colour varchar(255), primary key (registrationnumber))
+Step 1: Clone this git repository from https://github.com/shuklagauravjn/parkinglot.git <br />
+Step 2: Edit the properties file present at /src/main/resources/application.properties <br />
+Step 3: change the value for spring.datasource.url=jdbc:postgresql://<<your postgres host IP>>:<<your postgres host port>/<<your postgres database name> <br />
+Step 4: Go to the terminal window and the present working directory should be the root of this folder <br />
+Step 5: type mvn clean install This command will clean and later build this package. Check the logs and you should see some logs like this:<br />
+  Hibernate: alter table ticket drop constraint FK2ii5cq5xek9b6scbnn5h7nwia <br />
+  Hibernate: alter table ticket drop constraint FK5s6o4c33uj044cbfqxukrf9ki <br />
+  Hibernate: drop table if exists car cascade <br />
+  Hibernate: drop table if exists parkinglot cascade <br />
+  Hibernate: drop table if exists ticket cascade <br />
+  Hibernate: drop sequence if exists parkinglotsequence <br />
+  Hibernate: create sequence parkinglotsequence start 1 increment 50 <br />
+  Hibernate: create table car (registrationnumber varchar(255) not null, colour varchar(255), primary key (registrationnumber)) <br />
   Hibernate: create table parkinglot (slotnumber int4 not null, isavailable varchar(255), primary key (slotnumber))
-  Hibernate: create table ticket (ticketid int4 not null, registrationnumer varchar(255), slotnumer int4, primary key (ticketid))
-  Hibernate: alter table ticket add constraint FK2ii5cq5xek9b6scbnn5h7nwia foreign key (registrationnumer) references car
-  Hibernate: alter table ticket add constraint FK5s6o4c33uj044cbfqxukrf9ki foreign key (slotnumer) references parkinglot
-Step 6: This means that your data base is setup.
-Step 7: Check the logs and you will see "Tests run: 5, Failures: 0, Errors: 0, Skipped: 0" This means that the junit test has passed.
-Step 7: A "BUILD SUCCESS" message means that things are developed properly on your local machine. In case you have any issue, please reach out to me at shuklagauravjn@gmail.com
-Step 8: Now on the same folder in your terminal type java -jar target/parkingLot-REST-0.1.jar This will start the Springboot based parking lot application.
-Step 9: 
+  Hibernate: create table ticket (ticketid int4 not null, registrationnumer varchar(255), slotnumer int4, primary key (ticketid)) <br />
+  Hibernate: alter table ticket add constraint FK2ii5cq5xek9b6scbnn5h7nwia foreign key (registrationnumer) references car <br />
+  Hibernate: alter table ticket add constraint FK5s6o4c33uj044cbfqxukrf9ki foreign key (slotnumer) references parkinglot <br />
+Step 6: This means that your data base is setup. <br />
+Step 7: Check the logs and you will see "Tests run: 5, Failures: 0, Errors: 0, Skipped: 0" This means that the junit test has passed. <br />
+Step 7: A "BUILD SUCCESS" message means that things are developed properly on your local machine. In case you have any issue, please reach out to me at shuklagauravjn@gmail.com <br />
+Step 8: Now on the same folder in your terminal type java -jar target/parkingLot-REST-0.1.jar This will start the Springboot based parking lot application. <br />
+Step 9: <br />
 ## Technical Architecture
 In this section we are detailing out the technical architecture of the parking lot application.
 ### Data Model
