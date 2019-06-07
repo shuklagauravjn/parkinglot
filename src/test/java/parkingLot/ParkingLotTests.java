@@ -47,7 +47,7 @@ public class ParkingLotTests {
                 .getForEntity("http://localhost:" + this.port + "/issueTicket?registrationNumber=KA53MA9184&colour=BLACK", String.class);
         assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
-    //@Test
+    @Test
     public void testReturnTicket() throws Exception {
         ResponseEntity<String> entity = restTemplate
                 .getForEntity("http://localhost:" + this.port + "/issueTicket?registrationNumber=KA53MA9188&colour=RED", String.class);
@@ -58,6 +58,12 @@ public class ParkingLotTests {
         String ticketNumber = words[5];
         entity = restTemplate
                 .getForEntity("http://localhost:" + this.port + "/returnTicket?ticketId="+ticketNumber, String.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+    }
+    @Test
+    public void testFindRegistrationNumberByColour() throws Exception {
+        ResponseEntity<String> entity = restTemplate
+                .getForEntity("http://localhost:" + this.port + "/findRegistrationNumberByColour?colour=BLACK", String.class);
         assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
 }

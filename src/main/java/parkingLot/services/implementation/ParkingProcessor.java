@@ -67,21 +67,13 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 	}
 
 	@Override
-	public List<Car> findRegistrationNumberByColour(String colour) {
-		List<Car> carList = new ArrayList<Car>();
-		List<Car> cars= carRepository.findByColour(colour);
-		for(int index= 0;index<cars.size();index++) {
-			Car car = cars.get(index);
-			List<Ticket> tickets = car.getTickets();
-			for(int ticketIndex= 0; ticketIndex<tickets.size(); ticketIndex++) {
-				Ticket ticket = tickets.get(ticketIndex);
-				if(ticket.getParkinglot().getIsavailable().equals(NO)) {
-					// this means these are the cars that are currently parked
-					carList.add(car);
-				}
-			}
+	public String findRegistrationNumberByColour(String colour) {
+		List<Car> cars = carRepository.findByColour(colour);
+		String regNumbers = new String();
+		for(int index=0;index<cars.size();index++) {
+			regNumbers+=(cars.get(index).getRegistrationnumber());
 		}
-		return carList;
+		return regNumbers;
 	}
 
 	@Override
@@ -99,8 +91,8 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 	}
 
 	@Override
-	public List<Integer> findSlotNumberByCarColour(String colour) {
-		List<Integer> slots = new ArrayList<Integer>();
+	public String findSlotNumberByCarColour(String colour) {
+		String slots = new String();
 		List<Car> cars = carRepository.findByColour(colour);
 		for(int carsIndex = 0;carsIndex<cars.size();carsIndex++) {
 			Car car = cars.get(carsIndex);
@@ -109,7 +101,7 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 				Ticket ticket = tickets.get(index);
 				Parkinglot parkinglot = ticket.getParkinglot();
 				if(parkinglot.getIsavailable().equals(NO)) {
-					slots.add(parkinglot.getSlotnumber());
+					slots+=(parkinglot.getSlotnumber().toString());
 				}
 			}		
 		}

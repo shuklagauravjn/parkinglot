@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import parkingLot.entity.Car;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,29 +24,40 @@ public class ParkingLotController {
 
     @Autowired
     private parkingLot.services.implementation.ParkingProcessor parkingProcessor;
-    
+    //done
     @RequestMapping("/setParkinglotSize")
     @GetMapping(value = "/{parkingSize}")
     @ApiResponses(value = {
-            @ApiResponse(code = 500, message = "Issue with retrieving details",response = String.class),
+            @ApiResponse(code = 500, message = "Issue with setting parking size",response = String.class),
             @ApiResponse(code = 200, message = "Success", response = String.class) })
     public ResponseEntity<String> setParkinglotSize(@RequestParam(value = "parkingSize") String parkingSize) {
     	parkingProcessor.setParkinglotSize(Integer.parseInt(parkingSize));
     	return new ResponseEntity<String>("The Parking Size is set to "+parkingSize,HttpStatus.OK);
 
     }
+    //done
     @RequestMapping("/findSlotNumberByCarColour")
-    public String findSlotNumberByCarColour() {
-        return "Code project for Backend Engineer, GO-Life/Commerce";
+    @GetMapping(value = "/{colour}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = "Issue with getting Slot number by colour",response = String.class),
+            @ApiResponse(code = 200, message = "Success", response = List.class) })
+    public ResponseEntity<String> findSlotNumberByCarColour(@RequestParam(value = "colour") String colour) {
+    	String message =null;
+    	String regNumbers = parkingProcessor.findSlotNumberByCarColour(colour);
+    	return new ResponseEntity<String>(regNumbers,HttpStatus.OK);
     }
-    @RequestMapping("/findSlotNumberByRegistrationNumber")
-    public String findSlotNumberByRegistrationNumber() {
-        return "Code project for Backend Engineer, GO-Life/Commerce";
-    }
+    //done
     @RequestMapping("/findRegistrationNumberByColour")
-    public String findRegistrationNumberByColour() {
-        return "Code project for Backend Engineer, GO-Life/Commerce";
+    @GetMapping(value = "/{colour}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = "Issue with getting registration number by colour",response = String.class),
+            @ApiResponse(code = 200, message = "Success", response = List.class) })
+    public ResponseEntity<String> findRegistrationNumberByColour(@RequestParam(value = "colour") String colour) {
+    	String message =null;
+    	String regNumbers = parkingProcessor.findRegistrationNumberByColour(colour);
+    	return new ResponseEntity<String>(regNumbers,HttpStatus.OK);
     }
+    //done
     @RequestMapping("/returnTicket")
     @GetMapping(value = "/{ticketId}")
     @ApiResponses(value = {
@@ -54,6 +69,7 @@ public class ParkingLotController {
     	String message = ticketId+ " accepted. Now slot number "+slotNumber+" is available";
         return new ResponseEntity<String>(message,HttpStatus.OK);
     } 
+    //done
     @RequestMapping("/issueTicket")
     @GetMapping(value = "/{registrationNumber}/{colour}")
     @ApiResponses(value = {
@@ -69,5 +85,16 @@ public class ParkingLotController {
     		message = "All the parking slots are full";
     	}
         return new ResponseEntity<String>(message,HttpStatus.OK);
-    } 
+    }
+    //done
+    @RequestMapping("/findSlotNumberByRegistrationNumber")
+    @GetMapping(value = "/{registrationNumber}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = "Issue with getting slot number by registration number",response = String.class),
+            @ApiResponse(code = 200, message = "Success", response = List.class) })
+    public ResponseEntity<String> findSlotNumberByRegistrationNumber(@RequestParam(value = "registrationNumber") String registrationNumber) {
+    	String regNumbers = ""+parkingProcessor.findSlotNumberByRegistrationNumber(registrationNumber);
+    	return new ResponseEntity<String>(regNumbers,HttpStatus.OK);
+    }
+
 }
