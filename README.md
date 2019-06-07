@@ -9,7 +9,7 @@ Please refer to the read me file before you start using this project.
 ## Software Installation Instrtuctions
 Step 1: Clone this git repository from https://github.com/shuklagauravjn/parkinglot.git <br />
 Step 2: Edit the properties file present at /src/main/resources/application.properties <br />
-Step 3: change the value for spring.datasource.url=jdbc:postgresql://<<your postgres host IP>>:<<your postgres host port>/<<your postgres database name> <br />
+Step 3: change the value for spring.datasource.url=jdbc:postgresql://your postgres host IP:your postgres host port/your postgres database name <br />
 Step 4: Go to the terminal window and the present working directory should be the root of this folder <br />
 Step 5: type mvn clean install This command will clean and later build this package. Check the logs and you should see some logs like this:<br />
   Hibernate: alter table ticket drop constraint FK2ii5cq5xek9b6scbnn5h7nwia <br />
