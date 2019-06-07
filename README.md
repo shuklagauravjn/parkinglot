@@ -12,33 +12,30 @@ Step 2: Edit the properties file present at /src/main/resources/application.prop
 Step 3: change the value for spring.datasource.url=jdbc:postgresql://your postgres host IP:your postgres host port/your postgres database name <br />
 Step 4: Go to the terminal window and the present working directory should be the root of this folder <br />
 Step 5: type cd bin/setup.sh <br />
-Step 5.1: This command will execute <br/>
- cd ../.. --> this means it will go to the base folder<br />
- mvn clean install --> this will build the application successfully provided you have entered correct datasource url <br />
-  Check the logs and you should see some logs like this:<br />
-  Hibernate: alter table ticket drop constraint FK2ii5cq5xek9b6scbnn5h7nwia <br />
-  Hibernate: alter table ticket drop constraint FK5s6o4c33uj044cbfqxukrf9ki <br />
-  Hibernate: drop table if exists car cascade <br />
-  Hibernate: drop table if exists parkinglot cascade <br />
-  Hibernate: drop table if exists ticket cascade <br />
-  Hibernate: drop sequence if exists parkinglotsequence <br />
-  Hibernate: create sequence parkinglotsequence start 1 increment 50 <br />
-  Hibernate: create table car (registrationnumber varchar(255) not null, colour varchar(255), primary key (registrationnumber)) <br />
-  Hibernate: create table parkinglot (slotnumber int4 not null, isavailable varchar(255), primary key (slotnumber))
-  Hibernate: create table ticket (ticketid int4 not null, registrationnumer varchar(255), slotnumer int4, primary key (ticketid)) <br />
-  Hibernate: alter table ticket add constraint FK2ii5cq5xek9b6scbnn5h7nwia foreign key (registrationnumer) references car <br />
-  Hibernate: alter table ticket add constraint FK5s6o4c33uj044cbfqxukrf9ki foreign key (slotnumer) references parkinglot <br />
+>> Step 5.1: This command will execute <br/>
+ >> cd ../.. --> this means it will go to the base folder<br />
+ >> mvn clean install --> this will build the application successfully provided you have entered correct datasource url <br />
+ >> Check the logs and you should see some logs like this:<br />
+ >> Hibernate: alter table ticket drop constraint FK2ii5cq5xek9b6scbnn5h7nwia <br />
+ >> Hibernate: alter table ticket drop constraint FK5s6o4c33uj044cbfqxukrf9ki <br />
+ >> Hibernate: drop table if exists car cascade <br />
+ >> Hibernate: drop table if exists parkinglot cascade <br />
+ >> Hibernate: drop table if exists ticket cascade <br />
+ >> Hibernate: drop sequence if exists parkinglotsequence <br />
+ >> Hibernate: create sequence parkinglotsequence start 1 increment 50 <br />
+ >> Hibernate: create table car (registrationnumber varchar(255) not null, colour varchar(255), primary key (registrationnumber)) <br />
+>>  Hibernate: create table parkinglot (slotnumber int4 not null, isavailable varchar(255), primary key (slotnumber))
+>>  Hibernate: create table ticket (ticketid int4 not null, registrationnumer varchar(255), slotnumer int4, primary key (ticketid)) <br />
+>>  Hibernate: alter table ticket add constraint FK2ii5cq5xek9b6scbnn5h7nwia foreign key (registrationnumer) references car <br />
+ >> Hibernate: alter table ticket add constraint FK5s6o4c33uj044cbfqxukrf9ki foreign key (slotnumer) references parkinglot <br />
 Step 5.2: This means that your data base is setup. <br />
 Step 5.3: Check the logs and you will see "Tests run: 5, Failures: 0, Errors: 0, Skipped: 0" This means that the junit test has passed. <br />
 Step 5.4: A "BUILD SUCCESS" message means that things are developed properly on your local machine. In case you have any issue, please reach out to me at shuklagauravjn@gmail.com <br />
 Step 5.5: Now on the same folder in your terminal the setup.sh will start the spring boot application using the command java -jar target/parkingLot-REST-0.1.jar <br />
-Step 6: Now open other terminal and go to /bin/parkingLot folder<br />
-Step 6.1: check the content of the input.txt file. edit or change if its required.<br />
-Step 6.2: type ./run.sh<br />
-Step 6.3: type ./run.sh<br />
+
 ## Software Execution Instrtuctions
-Step 1:Go to the root folder<br />
-Step 2:Go to the root folder<br />
+Step 1:Go to client project https://github.com/shuklagauravjn/parkingLot-REST-Client<br />
+Step 2:clone it into a separate Java project and follow instructions as per the project's read me file<br />
 ## Technical Architecture
 In this section we are detailing out the technical architecture of the parking lot application.
 ### Data Model
