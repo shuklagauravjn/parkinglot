@@ -1,28 +1,34 @@
 package parkingLot.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 /**
  * The persistent class for the parkinglot database table.
  * 
  */
 @Entity
-@NamedQuery(name="Parkinglot.findAll", query="SELECT p FROM Parkinglot p")
+@NamedQuery(name = "Parkinglot.findAll", query = "SELECT p FROM Parkinglot p")
 public class Parkinglot implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PARKINGLOT_SLOTNUMBER_GENERATOR", sequenceName="PARKINGLOTSEQUENCE")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PARKINGLOT_SLOTNUMBER_GENERATOR")
+	@SequenceGenerator(name = "PARKINGLOT_SLOTNUMBER_GENERATOR", sequenceName = "PARKINGLOTSEQUENCE")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PARKINGLOT_SLOTNUMBER_GENERATOR")
 	private Integer slotnumber;
 
 	private String isavailable;
 
-	//bi-directional many-to-one association to Ticket
-	@OneToMany(mappedBy="parkinglot")
+	// bi-directional many-to-one association to Ticket
+	@OneToMany(mappedBy = "parkinglot")
 	private List<Ticket> tickets;
 
 	public Parkinglot() {

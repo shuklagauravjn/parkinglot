@@ -1,16 +1,19 @@
 package parkingLot.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * The persistent class for the car database table.
  * 
  */
 @Entity
-@NamedQuery(name="Car.findAll", query="SELECT c FROM Car c")
+@NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c")
 public class Car implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,8 +22,8 @@ public class Car implements Serializable {
 
 	private String colour;
 
-	//bi-directional many-to-one association to Ticket
-	@OneToMany(mappedBy="car")
+	// bi-directional many-to-one association to Ticket
+	@OneToMany(mappedBy = "car")
 	private List<Ticket> tickets;
 
 	public Car() {
