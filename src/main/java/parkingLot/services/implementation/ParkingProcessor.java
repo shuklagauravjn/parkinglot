@@ -154,7 +154,7 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 		List<Ticket> issuedTickets = ticketRepository.findAll();
 		for (int index = 0; index < issuedTickets.size(); index++) {
 			Ticket ticket = issuedTickets.get(index);
-			message += ticket.getParkinglot().getSlotnumber() + "\t" + ticket.getCar().getRegistrationnumber() + "\t"
+			message += "\n"+ticket.getParkinglot().getSlotnumber() + "\t" + ticket.getCar().getRegistrationnumber() + "\t"
 					+ ticket.getCar().getColour() + "\n";
 		}
 		return message;
