@@ -53,17 +53,20 @@ public class ParkingLotTests {
                 .getForEntity("http://localhost:" + this.port + "/issueTicket?registrationNumber=KA53MA9188&colour=RED", String.class);
         assertEquals(HttpStatus.OK, entity.getStatusCode());
         String id = entity.getBody();
-        //The ticket with ticket number 56 has been issued to KA53MA9188 with GREY colour
-        String [] words = id.split(" ");
-        String ticketNumber = words[5];
         entity = restTemplate
-                .getForEntity("http://localhost:" + this.port + "/returnTicket?ticketId="+ticketNumber, String.class);
+                .getForEntity("http://localhost:" + this.port + "/returnTicket?slotNumber=1", String.class);
         assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
     @Test
     public void testFindRegistrationNumberByColour() throws Exception {
         ResponseEntity<String> entity = restTemplate
                 .getForEntity("http://localhost:" + this.port + "/findRegistrationNumberByColour?colour=BLACK", String.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+    }
+    @Test
+    public void testStatus() throws Exception {
+        ResponseEntity<String> entity = restTemplate
+                .getForEntity("http://localhost:" + this.port + "/status", String.class);
         assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
 }

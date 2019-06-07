@@ -14,5 +14,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	Ticket findByParkinglot(Parkinglot slotnumber);
     List<Ticket> findByCar(Car registrationNumber);
-	//Ticket findOne(Integer integer);
 }

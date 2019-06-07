@@ -25,7 +25,7 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
     @Autowired
     private TicketRepository ticketRepository;
 	@Override
-	public int issueTicket(String registrationNumber, String colour) {
+	public String issueTicket(String registrationNumber, String colour) {
 
 		List <Parkinglot>parkinglots = parkinglotRepository.findByIsavailable(YES);
 		if(parkinglots.size()>0) {
@@ -44,10 +44,10 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 			ticket.setParkinglot(parkinglot);
 			ticket.setCar(car);			
 			ticket = ticketRepository.saveAndFlush(ticket);
-			return ticket.getTicketid().intValue();
+			return "Allocated slot number: "+ticket.getParkinglot().getSlotnumber()+"\n";
 		}else {
 				// this means there are no parking slots that are available
-				return 0;
+			return "Sorry, parking lot is full\n";
 			}
 	}
 
@@ -65,15 +65,35 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 		parkinglotRepository.save(parkinglot);
 		return parkinglot.getSlotnumber().intValue();
 	}
+	@Override
+	public int returnTicketBySlotNumber(int slotNumber) {
+		Optional<Parkinglot> parkinglot = parkinglotRepository.findById(new Integer(slotNumber));
+		//make car parTking slot as available
+		Parkinglot parkinglott = parkinglot.get();
+		Ticket ticket = ticketRepository.findByParkinglot(parkinglott);
+		parkinglott.setIsavailable(YES);
+		
+		Car car = ticket.getCar();
+		ticketRepository.delete(ticket);
+		carRepository.delete(car);
+		//parkinglotRepository.save(parkinglott);
 
+		return parkinglott.getSlotnumber().intValue();
+	}
 	@Override
 	public String findRegistrationNumberByColour(String colour) {
 		List<Car> cars = carRepository.findByColour(colour);
 		String regNumbers = new String();
 		for(int index=0;index<cars.size();index++) {
-			regNumbers+=(cars.get(index).getRegistrationnumber());
+			regNumbers+=(cars.get(index).getRegistrationnumber())+", ";
 		}
-		return regNumbers;
+		int regNumberSize = regNumbers.length();
+		if(regNumberSize!=0) {
+			return regNumbers.substring(0, regNumberSize-2);			
+		}else {
+			return regNumbers;
+		}
+
 	}
 
 	@Override
@@ -101,20 +121,38 @@ public class ParkingProcessor implements ParkingLotProcessorImpl {
 				Ticket ticket = tickets.get(index);
 				Parkinglot parkinglot = ticket.getParkinglot();
 				if(parkinglot.getIsavailable().equals(NO)) {
-					slots+=(parkinglot.getSlotnumber().toString());
+					slots+=(parkinglot.getSlotnumber().toString())+", ";
 				}
 			}		
+		}		
+		int slotsSize = slots.length();
+		if(slotsSize!=0) {
+			return slots.substring(0, slotsSize-2);			
+		}else {
+			return slots;			
 		}
-		return slots;
+
 	}
 	@Override
-	public void setParkinglotSize(int parkingSize) {
+	public String setParkinglotSize(int parkingSize) {
+		String message="Created a parking lot with "+parkingSize+" slots\n";
 		parkinglotRepository.deleteAll();
 		for(int index=0;index<parkingSize;index++) {
 			Parkinglot parkinglot = new Parkinglot();
 			parkinglot.setIsavailable(YES);
 			parkinglotRepository.save(parkinglot);
 		}
+		return message;
+	}
 
+	@Override
+	public String status() {
+		String message ="Slot No.\t Registration No \t Colour \n";
+		List<Ticket> issuedTickets = ticketRepository.findAll();
+		for(int index=0;index<issuedTickets.size();index++) {
+			Ticket ticket = issuedTickets.get(index);
+			message+=ticket.getParkinglot().getSlotnumber()+"\t"+ticket.getCar().getRegistrationnumber()+"\t"+ticket.getCar().getColour()+"\n";
+		}
+		return message;
 	}
 }

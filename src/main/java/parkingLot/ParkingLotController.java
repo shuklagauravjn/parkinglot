@@ -31,8 +31,8 @@ public class ParkingLotController {
             @ApiResponse(code = 500, message = "Issue with setting parking size",response = String.class),
             @ApiResponse(code = 200, message = "Success", response = String.class) })
     public ResponseEntity<String> setParkinglotSize(@RequestParam(value = "parkingSize") String parkingSize) {
-    	parkingProcessor.setParkinglotSize(Integer.parseInt(parkingSize));
-    	return new ResponseEntity<String>("The Parking Size is set to "+parkingSize,HttpStatus.OK);
+    	String message = parkingProcessor.setParkinglotSize(Integer.parseInt(parkingSize));
+    	return new ResponseEntity<String>(message,HttpStatus.OK);
 
     }
     //done
@@ -59,14 +59,15 @@ public class ParkingLotController {
     }
     //done
     @RequestMapping("/returnTicket")
-    @GetMapping(value = "/{ticketId}")
+    @GetMapping(value = "/{slotNumber}")
     @ApiResponses(value = {
             @ApiResponse(code = 500, message = "Issue with return ticket function",response = String.class),
             @ApiResponse(code = 200, message = "Success", response = String.class) })
 
-    public ResponseEntity<String>  returnTicket(@RequestParam(value = "ticketId") String ticketId) {
-    	int slotNumber = parkingProcessor.returnTicket(Integer.parseInt(ticketId));
-    	String message = ticketId+ " accepted. Now slot number "+slotNumber+" is available";
+    public ResponseEntity<String>  returnTicket(@RequestParam(value = "slotNumber") String slotNumber) {
+    	int slotNumberReturned = parkingProcessor.returnTicketBySlotNumber(Integer.parseInt(slotNumber));
+    	//String message = ticketId+ " accepted. Now slot number "+slotNumber+" is available";
+    	String message = "Slot number "+slotNumberReturned+" is free";
         return new ResponseEntity<String>(message,HttpStatus.OK);
     } 
     //done
@@ -77,13 +78,7 @@ public class ParkingLotController {
             @ApiResponse(code = 200, message = "Success", response = String.class) })
 
     public ResponseEntity<String>  issueTicket(@RequestParam(value = "registrationNumber") String registrationNumber,@RequestParam(value = "colour") String colour) {
-    	int ticketNumber = parkingProcessor.issueTicket(registrationNumber, colour);
-    	String message =null;
-    	if(ticketNumber!=0) {
-    		message = "The ticket with ticket number "+ticketNumber+" has been issued to "+registrationNumber+" with "+colour+" colour";
-    	}else {
-    		message = "All the parking slots are full";
-    	}
+    	String message =parkingProcessor.issueTicket(registrationNumber, colour);
         return new ResponseEntity<String>(message,HttpStatus.OK);
     }
     //done
@@ -93,8 +88,21 @@ public class ParkingLotController {
             @ApiResponse(code = 500, message = "Issue with getting slot number by registration number",response = String.class),
             @ApiResponse(code = 200, message = "Success", response = List.class) })
     public ResponseEntity<String> findSlotNumberByRegistrationNumber(@RequestParam(value = "registrationNumber") String registrationNumber) {
-    	String regNumbers = ""+parkingProcessor.findSlotNumberByRegistrationNumber(registrationNumber);
-    	return new ResponseEntity<String>(regNumbers,HttpStatus.OK);
+    	int slotNumber = parkingProcessor.findSlotNumberByRegistrationNumber(registrationNumber);
+    	if(slotNumber !=0) {
+    		return new ResponseEntity<String>(""+slotNumber,HttpStatus.OK);
+    	}else {
+    		return new ResponseEntity<String>("Not found",HttpStatus.OK);
+    	}
+    	
     }
-
+  //done
+    @RequestMapping("/status")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = "Issue with getting the status",response = String.class),
+            @ApiResponse(code = 200, message = "Success", response = List.class) })
+    public ResponseEntity<String> status() {
+    	String message = parkingProcessor.status();
+    	return new ResponseEntity<String>(message,HttpStatus.OK);
+    }
 }
