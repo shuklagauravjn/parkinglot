@@ -1,2 +1,2 @@
- cd ../..
-java -jar target/parkingLot-REST-0.1.jar
+cd ../..
+docker run -p 9090:9090 parkinglotdockerimage
