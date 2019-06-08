@@ -8,13 +8,11 @@ Please refer to the read me file before you start using this project.
 6. Unit testing
 ## Software Installation Instrtuctions
 Step 1: Clone this git repository from https://github.com/shuklagauravjn/parkinglot.git <br />
-Step 2: Edit the properties file present at /src/main/resources/application.properties <br />
-Step 3: change the value for spring.datasource.url=jdbc:postgresql://your postgres host IP:your postgres host port/your postgres database name <br />
-Step 4: Go to the terminal window and the present working directory should be the root of this folder <br />
-Step 5: type cd bin/setup.sh <br />
->> Step 5.1: This command will execute <br/>
- >> cd ../.. --> this means it will go to the base folder<br />
- >> mvn clean install --> this will build the application successfully provided you have entered correct datasource url <br />
+Step 2: go to bin/setup folder and run the settup.sh file <br />
+Step 3: 
+ Step 3.1: This command will execute <br/>
+ cd ../.. --> this means it will go to the base folder<br />
+ mvn clean install --> this will build the application successfully <br />
  >> Check the logs and you should see some logs like this:<br />
  >> Hibernate: alter table ticket drop constraint FK2ii5cq5xek9b6scbnn5h7nwia <br />
  >> Hibernate: alter table ticket drop constraint FK5s6o4c33uj044cbfqxukrf9ki <br />
@@ -28,10 +26,11 @@ Step 5: type cd bin/setup.sh <br />
 >>  Hibernate: create table ticket (ticketid int4 not null, registrationnumer varchar(255), slotnumer int4, primary key (ticketid)) <br />
 >>  Hibernate: alter table ticket add constraint FK2ii5cq5xek9b6scbnn5h7nwia foreign key (registrationnumer) references car <br />
  >> Hibernate: alter table ticket add constraint FK5s6o4c33uj044cbfqxukrf9ki foreign key (slotnumer) references parkinglot <br />
-Step 5.2: This means that your data base is setup. <br />
-Step 5.3: Check the logs and you will see "Tests run: 5, Failures: 0, Errors: 0, Skipped: 0" This means that the junit test has passed. <br />
-Step 5.4: A "BUILD SUCCESS" message means that things are developed properly on your local machine. In case you have any issue, please reach out to me at shuklagauravjn@gmail.com <br />
-Step 5.5: Now on the same folder in your terminal the setup.sh will start the spring boot application using the command java -jar target/parkingLot-REST-0.1.jar <br />
+Step 3.2: This means that your data base is setup. <br />
+Step 3.3: Check the logs and you will see "Tests run: 5, Failures: 0, Errors: 0, Skipped: 0" This means that the junit test has passed. <br />
+Step 3.4: A "BUILD SUCCESS" message means that things are developed properly on your local machine. In case you have any issue, please reach out to me at shuklagauravjn@gmail.com <br />
+Step 4: Now go to ../parking_lot folder and run the ./run.sh file <br />
+Step 4.1: this will start the docker image and expose port 9090 <br />
 
 ## Software Execution Instrtuctions
 Step 1:Go to client project https://github.com/shuklagauravjn/parkingLot-REST-Client<br />
