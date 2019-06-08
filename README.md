@@ -1,11 +1,8 @@
 Please refer to the read me file before you start using this project.
 ## Software pre-requisites:
 1. Docker
-2. Kitematic
-3. Java version 8
-4. PostGres - try using the docker image for postgres at https://hub.docker.com/_/postgres
-5. Maven
-6. Unit testing
+2. Java version 8
+3. Maven
 ## Software Installation Instrtuctions
 Step 1: Clone this git repository from https://github.com/shuklagauravjn/parkinglot.git <br />
 Step 2: go to bin/setup folder and run the settup.sh file <br />
